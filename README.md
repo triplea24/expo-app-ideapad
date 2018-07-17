@@ -1,12 +1,12 @@
-# Login with Firebase
+# A sample idea (note) app
 
 Using firebase in React Native and Expo
 
 ## Instalation and running
 I assumed that you already installed npm, yarn and expo!
 
-    - git clone https://github.com/triplea24/expo-firebase-authentication-example.git
-    - cd expo-firebase-authentication-example/
+    - git clone https://github.com/triplea24/expo-app-ideapad.git
+    - cd expo-app-ideapad/
     - yarn install
 
 ### Important
