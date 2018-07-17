@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Button, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import { authInputChange } from '../actions';
+import { authInputChange,login } from '../actions';
 
 const Section = props => {
     const style = {
@@ -34,8 +34,8 @@ class LoginForm extends Component{
     }
 
     handleLogin(){
-        console.log('email',this.props.email);
-        console.log('password',this.props.password);
+        const { email, password } = this.props;
+        this.props.login( { email, password } );
     }
 }
 
@@ -49,7 +49,9 @@ const mapStateToProps = state => {
     return {
         email: state.auth.email,
         password: state.auth.password,
+        user: state.auth.user,
+        error: state.auth.error,
     };
 }
 
-export default connect(mapStateToProps, {authInputChange} )(LoginForm);
+export default connect(mapStateToProps, { authInputChange, login } )(LoginForm);
