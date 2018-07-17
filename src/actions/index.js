@@ -43,6 +43,7 @@ export const NEW_IDEAD_ADDED = 'NEW_IDEAD_ADDED';
 export const ADD_NEW_IDEA_FAILED = 'ADD_NEW_IDEA_FAILED';
 export const START_LOADING_ADD_NEW_IDEA = 'START_LOADING_ADD_NEW_IDEA'; 
 export const FETCH_IDEAS = 'FETCH_IDEAS';
+export const IDEA_EDITED = 'IDEA_EDITED';
 
 export function ideaInputChange({field,value}){
     return {
@@ -74,5 +75,15 @@ export function fetchIdeas(){
             .on('value', snapshot => {
                 dispatch({type: FETCH_IDEAS, payload: snapshot.val()});
             });
+    };
+}
+
+export function editIdea({id,title,text}){
+    return dispatch => {
+        const {uid} = firebase.auth().currentUser;
+        dispatch( {type: START_LOADING_ADD_NEW_IDEA,});
+        firebase.database().ref(`ideas/${uid}/ideas/${id}`)
+            .set({title,text})
+            .then(()=> dispatch({type: IDEA_EDITED}));
     };
 }

@@ -39,6 +39,15 @@ const AppStack = createStackNavigator({
             headerTitle: 'New Idea',
         }
     },
+    EditIdea: {
+        screen: IdeaForm,
+        navigationOptions: ({navigation}) => {
+            const idea = navigation.getParam('idea');
+            return ({
+                title: idea.title,
+            });
+        }
+    },
 });
 
 export default createSwitchNavigator(

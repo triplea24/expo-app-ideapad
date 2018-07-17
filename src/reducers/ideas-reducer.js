@@ -3,7 +3,8 @@ import {
     START_LOADING_ADD_NEW_IDEA,
     NEW_IDEAD_ADDED,
     ADD_NEW_IDEA_FAILED,
-    FETCH_IDEAS
+    FETCH_IDEAS,
+    IDEA_EDITED
 } from '../actions';
 
 const initialState = {
@@ -26,6 +27,8 @@ export default (state=initialState,action) => {
             return { ...state, error: action.payload, loading: false};
         case FETCH_IDEAS:
             return { ...state, ideas: action.payload };
+        case IDEA_EDITED:
+            return { ...state, loading: false };
         default:
             return state;
     }

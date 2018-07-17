@@ -17,6 +17,7 @@ class IdeasList extends Component{
                 <ListItem
                     key={idea.id}
                     leftIcon={{name: 'flight-takeoff'}}
+                    onPress={()=> this.props.navigation.navigate('EditIdea',{idea})}
                     title={idea.title}
                 />
             );
