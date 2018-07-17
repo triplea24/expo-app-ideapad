@@ -9,5 +9,8 @@ I assumed that you already installed npm, yarn and expo!
     - cd expo-firebase-authentication-example/
     - yarn install
 
+### Important
+Create a file called firebase.js inside the project's directory and put the firebase config variable there.
+
 To run the project just simply run this command:
-    exp start
+    `exp start`
