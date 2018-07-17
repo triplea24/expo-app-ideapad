@@ -1,15 +1,31 @@
 import React, {Component} from 'react';
 import { StyleSheet, } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
-export default class IdeasList extends Component{   
+import { fetchIdeas } from '../actions';
+
+class IdeasList extends Component{   
+    componentDidMount(){
+        this.props.fetchIdeas();
+    }
+    renderIdeas(){
+        console.log('ideas',this.props.ideas);
+        return this.props.ideas.map(idea => {
+            return (
+                <ListItem
+                    key={idea.id}
+                    leftIcon={{name: 'flight-takeoff'}}
+                    title={idea.title}
+                />
+            );
+        });
+    }
     render(){
         return (
             <List containerStyle={styles.container}>
-                 <ListItem
-                    leftIcon={{name: 'flight-takeoff'}}
-                    title={'Dummy'}
-                />
+                 { this.renderIdeas() }
             </List>
         );
     }
@@ -20,3 +36,13 @@ const styles = StyleSheet.create({
         marginTop: 0,
     }
 });
+function mapStateToProps(state){
+    const ideas = _.map(state.ideas.ideas,(val,id)=> {
+        val['id'] = id;
+        return val;
+    });
+    return {
+        ideas
+    };
+}
+export default connect(mapStateToProps, { fetchIdeas })(IdeasList);
