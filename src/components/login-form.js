@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { Button, FormInput, FormValidationMessage } from 'react-native-elements';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import { authInputChange,login } from '../actions';
 import IdeaForm from './idea-form';
@@ -19,6 +20,11 @@ const Section = props => {
 
 
 class LoginForm extends Component{
+    componentWillReceiveProps(nextProps){
+        if(!_.isEmpty(nextProps.user)){
+            this.props.navigation.navigate('App');
+        }
+    }
     renderLoginButton(){
         if( this.props.loading ){
             return (
