@@ -3,6 +3,7 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import LoginForm from './components/login-form';
 import IdeasList from './components/ideas-list';
 import IdeaForm from './components/idea-form';
+import { Icon } from 'react-native-elements';
 
 const AuthStack = createStackNavigator({
     Login: {
@@ -16,8 +17,20 @@ const AuthStack = createStackNavigator({
 const AppStack = createStackNavigator({
     Ideas: {
         screen: IdeasList,
-        navigationOptions: {
-            headerTitle: 'Ideas',
+        navigationOptions: ({navigation}) => {
+            return ({
+                title: 'Your Ideas',
+                headerRight: (
+                    <Icon
+                        type='evilicon'
+                        name='plus'
+                        size={30}
+                        onPress={()=>navigation.navigate('NewIdea')}
+                        iconStyle={{paddingRight:10}}
+                        />
+                ),
+                headerLeft: null,
+            });
         }
     },
     NewIdea: {
