@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, FormInput } from 'react-native-elements';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { Button, FormInput, FormValidationMessage } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { authInputChange,login } from '../actions';
@@ -15,7 +15,28 @@ const Section = props => {
     );
 }
 
+
 class LoginForm extends Component{
+    renderLoginButton(){
+        if( this.props.loading ){
+            return (
+                <ActivityIndicator size={'small'}/>
+            );
+        }
+        return (
+            <Button onPress={this.handleLogin.bind(this)} title='Login' backgroundColor='#3bd3d4'/>
+        );
+    }
+    renderError(){
+        if(this.props.error){
+            return (
+                <Section>
+                    <FormValidationMessage>{this.props.error.message}</FormValidationMessage>
+                </Section>
+            );
+        }
+        return null;
+    }
     render(){
         return (
             <View style={styles.container}>
@@ -28,7 +49,8 @@ class LoginForm extends Component{
                     placeholder='Password' 
                     secureTextEntry={true} />
                 </Section>
-                <Section><Button onPress={this.handleLogin.bind(this)} title='Login' backgroundColor='#3bd3d4'/></Section>
+                {this.renderError()}
+                <Section>{this.renderLoginButton()}</Section>
             </View>
         );
     }
@@ -51,6 +73,7 @@ const mapStateToProps = state => {
         password: state.auth.password,
         user: state.auth.user,
         error: state.auth.error,
+        loading: state.auth.loading,
     };
 }
 
