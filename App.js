@@ -2,12 +2,17 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Constants } from 'expo';
 import firebase from 'firebase';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 import LoginForm from './src/components/login-form';
 import Header from './src/components/Header';
+import reducers from './src/reducers';
 
 // NOTE: Create a firebase.js file inside the project directory and export the config variable there!!!
 import config from './firebase';
+
+const store = createStore(reducers);
 
 export default class App extends React.Component {
   componentDidMount(){
@@ -15,10 +20,12 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Header />
-        <LoginForm />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <Header title='Login'/>
+          <LoginForm />
+        </View>
+      </Provider>
     );
   }
 }
