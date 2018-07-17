@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { Button, FormInput, FormValidationMessage } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import { authInputChange,login } from '../actions';
+import { ideaInputChange, addNewIdea } from '../actions';
 
 const Section = props => {
     const style = {
@@ -17,14 +17,14 @@ const Section = props => {
 
 
 class IdeaForm extends Component{
-    renderLoginButton(){
+    renderSubmitButton(){
         if( this.props.loading ){
             return (
                 <ActivityIndicator size={'small'}/>
             );
         }
         return (
-            <Button onPress={this.handleLogin.bind(this)} title='Login' backgroundColor='#3bd3d4'/>
+            <Button onPress={this.handleSubmit.bind(this)} title='Submit' backgroundColor='#3bd3d4'/>
         );
     }
     renderError(){
@@ -38,29 +38,31 @@ class IdeaForm extends Component{
         return null;
     }
     render(){
-        return <Text>Idea Form</Text>;
         return (
             <View style={styles.container}>
                 <Section><FormInput 
-                    value={this.props.email}
-                    placeholder='Email' 
-                    onChangeText={text=> this.props.authInputChange({field:'email',value: text})}/>
+                    value={this.props.title}
+                    placeholder='Title' 
+                    onChangeText={text=> this.props.ideaInputChange({field:'title',value: text})}/>
                 </Section>
                 <Section><FormInput 
-                    value={this.props.password}
-                    onChangeText={text=> this.props.authInputChange({field:'password',value: text})}
-                    placeholder='Password' 
-                    secureTextEntry={true} />
+                    value={this.props.text}
+                    onChangeText={text=> this.props.ideaInputChange({field:'text',value: text})}
+                    placeholder='Text' 
+                    multiline={true} />
                 </Section>
                 {this.renderError()}
-                <Section>{this.renderLoginButton()}</Section>
+                <Section><Section>{this.renderSubmitButton()}</Section></Section>
             </View>
         );
     }
 
-    handleLogin(){
-        const { email, password } = this.props;
-        this.props.login( { email, password } );
+    handleSubmit(){
+        console.log('submit',this.props);
+        const {title,text} = this.props;
+        this.props.addNewIdea({title,text});
+        // const { email, password } = this.props;
+        // this.props.login( { email, password } );
     }
 }
 
@@ -72,12 +74,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        email: state.auth.email,
-        password: state.auth.password,
-        user: state.auth.user,
-        error: state.auth.error,
-        loading: state.auth.loading,
+        title: state.ideas.title,
+        text: state.ideas.text,
+        loading: state.ideas.loading,
+        error: state.ideas.error,
     };
 }
 
-export default connect(mapStateToProps, { authInputChange, login } )(IdeaForm);
+export default connect(mapStateToProps, { ideaInputChange, addNewIdea } )(IdeaForm);

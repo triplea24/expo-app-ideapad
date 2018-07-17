@@ -1,8 +1,8 @@
 import { AUTH_INPUT_CHANGE, LOGIN_SUCCESS, LOGIN_FAILURE, START_LOADING } from '../actions';
 
 const initialState = {
-    email: '',
-    password: '',
+    email: 'triplea1373@gmail.com',
+    password: 'testtest',
     user: null,
     error: null,
     loading: false,
