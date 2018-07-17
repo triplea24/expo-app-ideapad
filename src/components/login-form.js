@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { authInputChange,login } from '../actions';
 import IdeaForm from './idea-form';
+import IdeasList from './ideas-list';
 
 const Section = props => {
     const style = {
@@ -40,7 +41,7 @@ class LoginForm extends Component{
     }
     render(){
         if( this.props.user ){
-            return (<IdeaForm />);
+            return (<IdeasList />);
         }
         return (
             <View style={styles.container}>

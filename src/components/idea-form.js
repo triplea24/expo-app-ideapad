@@ -49,7 +49,8 @@ class IdeaForm extends Component{
                     value={this.props.text}
                     onChangeText={text=> this.props.ideaInputChange({field:'text',value: text})}
                     placeholder='Text' 
-                    multiline={true} />
+                    multiline={true} 
+                    inputStyle={{height:200}}/>
                 </Section>
                 {this.renderError()}
                 <Section><Section>{this.renderSubmitButton()}</Section></Section>
@@ -61,8 +62,6 @@ class IdeaForm extends Component{
         console.log('submit',this.props);
         const {title,text} = this.props;
         this.props.addNewIdea({title,text});
-        // const { email, password } = this.props;
-        // this.props.login( { email, password } );
     }
 }
 
