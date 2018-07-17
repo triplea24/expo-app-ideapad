@@ -13,7 +13,8 @@ import reducers from './src/reducers';
 // NOTE: Create a firebase.js file inside the project directory and export the config variable there!!!
 import config from './firebase';
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+const initialStore = {};
+const store = createStore(reducers, initialStore , applyMiddleware(ReduxThunk));
 
 export default class App extends React.Component {
   componentDidMount(){

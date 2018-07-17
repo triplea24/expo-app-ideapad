@@ -1,12 +1,10 @@
 import { AUTH_INPUT_CHANGE, LOGIN_SUCCESS, LOGIN_FAILURE, START_LOADING } from '../actions';
 
-const initialError = { code: '', message: ''};
-
 const initialState = {
     email: '',
     password: '',
-    user: {},
-    error: initialError,
+    user: null,
+    error: null,
     loading: false,
 }
 
@@ -15,7 +13,7 @@ export default (state=initialState,action) => {
         case AUTH_INPUT_CHANGE:
             return { ...state, [action.payload.field]: action.payload.value};
         case START_LOADING:
-            return { ...state, loading: true, error: initialError, };
+            return { ...state, loading: true, error: null, };
         case LOGIN_SUCCESS:
             return { ...state, user: action.payload, loading: false };
         case LOGIN_FAILURE:

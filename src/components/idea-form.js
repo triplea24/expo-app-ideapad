@@ -4,7 +4,6 @@ import { Button, FormInput, FormValidationMessage } from 'react-native-elements'
 import { connect } from 'react-redux';
 
 import { authInputChange,login } from '../actions';
-import IdeaForm from './idea-form';
 
 const Section = props => {
     const style = {
@@ -17,7 +16,7 @@ const Section = props => {
 }
 
 
-class LoginForm extends Component{
+class IdeaForm extends Component{
     renderLoginButton(){
         if( this.props.loading ){
             return (
@@ -39,9 +38,7 @@ class LoginForm extends Component{
         return null;
     }
     render(){
-        if( this.props.user ){
-            return (<IdeaForm />);
-        }
+        return <Text>Idea Form</Text>;
         return (
             <View style={styles.container}>
                 <Section><FormInput 
@@ -83,4 +80,4 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps, { authInputChange, login } )(LoginForm);
+export default connect(mapStateToProps, { authInputChange, login } )(IdeaForm);
