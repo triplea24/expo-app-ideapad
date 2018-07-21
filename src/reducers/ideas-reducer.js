@@ -20,7 +20,7 @@ export default (state=initialState,action) => {
         case IDEA_INPUT_CHANGE:
             return { ...state, [action.payload.field]: action.payload.value};
         case NEW_IDEAD_ADDED:
-            return initialState;
+            return { ...initialState, ideas: state.ideas, };
         case START_LOADING_ADD_NEW_IDEA:
             return { ...state, loading: true};
         case ADD_NEW_IDEA_FAILED:
