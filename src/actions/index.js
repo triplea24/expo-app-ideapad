@@ -45,6 +45,7 @@ export const START_LOADING_ADD_NEW_IDEA = 'START_LOADING_ADD_NEW_IDEA';
 export const FETCH_IDEAS = 'FETCH_IDEAS';
 export const IDEA_EDITED = 'IDEA_EDITED';
 export const CLEAR_IDEA_FORM = 'CLEAR_IDEA_FORM';
+export const IDEA_REMOVED = 'IDEA_REMOVED';
 
 export function ideaInputChange({field,value}){
     return {
@@ -86,6 +87,16 @@ export function editIdea({id,title,text}){
         firebase.database().ref(`ideas/${uid}/ideas/${id}`)
             .set({title,text})
             .then(()=> dispatch({type: IDEA_EDITED}));
+    };
+}
+
+export function removeIdea({id}){
+    return dispatch => {
+        const {uid} = firebase.auth().currentUser;
+        firebase.database().ref(`ideas/${uid}/ideas/${id}`)
+            .remove()
+            .then(() => dispatch({type: IDEA_REMOVED}))
+            .catch((err) => console.log(err));
     };
 }
 

@@ -6,6 +6,7 @@ import {
     FETCH_IDEAS,
     IDEA_EDITED,
     CLEAR_IDEA_FORM,
+    IDEA_REMOVED,
 } from '../actions';
 
 const initialState = {
@@ -32,6 +33,8 @@ export default (state=initialState,action) => {
             return { ...state, ideas: action.payload };
         case IDEA_EDITED:
             return { ...state, loading: false };
+        case IDEA_REMOVED:
+            return state;
         default:
             return state;
     }
