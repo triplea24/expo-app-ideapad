@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 
+import { saveAuthParams } from '../utils';
 
 // AUTH
 export const AUTH_INPUT_CHANGE = 'AUTH_INPUT_CHANGE';
@@ -19,8 +20,9 @@ export function login({email,password}){
     return dispatch => {
         dispatch( {type: START_LOADING,});
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(user => {
+            .then(async user => {
                 console.log('succesfully logged in');
+                await saveAuthParams({email,password});
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: user,
