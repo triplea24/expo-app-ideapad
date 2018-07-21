@@ -44,6 +44,7 @@ export const ADD_NEW_IDEA_FAILED = 'ADD_NEW_IDEA_FAILED';
 export const START_LOADING_ADD_NEW_IDEA = 'START_LOADING_ADD_NEW_IDEA'; 
 export const FETCH_IDEAS = 'FETCH_IDEAS';
 export const IDEA_EDITED = 'IDEA_EDITED';
+export const CLEAR_IDEA_FORM = 'CLEAR_IDEA_FORM';
 
 export function ideaInputChange({field,value}){
     return {
@@ -86,4 +87,8 @@ export function editIdea({id,title,text}){
             .set({title,text})
             .then(()=> dispatch({type: IDEA_EDITED}));
     };
+}
+
+export function clearIdeaForm(){
+    return { type: CLEAR_IDEA_FORM, };
 }

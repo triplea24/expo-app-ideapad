@@ -4,7 +4,7 @@ import { Button, FormInput, FormValidationMessage } from 'react-native-elements'
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { ideaInputChange, addNewIdea,editIdea } from '../actions';
+import { ideaInputChange, addNewIdea, editIdea, clearIdeaForm } from '../actions';
 
 const Section = props => {
     const style = {
@@ -26,6 +26,8 @@ class IdeaForm extends Component{
             _.each(params.idea,(value,field)=>{
                 this.props.ideaInputChange({value,field})
             });
+        }else {
+            this.props.clearIdeaForm();
         }
     }
     renderSubmitButton(){
@@ -100,4 +102,4 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps, { ideaInputChange, addNewIdea, editIdea } )(IdeaForm);
+export default connect(mapStateToProps, { ideaInputChange, addNewIdea, editIdea, clearIdeaForm } )(IdeaForm);

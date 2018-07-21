@@ -4,7 +4,8 @@ import {
     NEW_IDEAD_ADDED,
     ADD_NEW_IDEA_FAILED,
     FETCH_IDEAS,
-    IDEA_EDITED
+    IDEA_EDITED,
+    CLEAR_IDEA_FORM,
 } from '../actions';
 
 const initialState = {
@@ -23,6 +24,8 @@ export default (state=initialState,action) => {
             return { ...initialState, ideas: state.ideas, };
         case START_LOADING_ADD_NEW_IDEA:
             return { ...state, loading: true};
+        case CLEAR_IDEA_FORM:
+            return { ...initialState, ideas: state.ideas, };
         case ADD_NEW_IDEA_FAILED:
             return { ...state, error: action.payload, loading: false};
         case FETCH_IDEAS:
