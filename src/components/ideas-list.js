@@ -4,20 +4,20 @@ import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { fetchIdeas } from '../actions';
+import { fetchIdeas, removeIdea } from '../actions';
 
 class IdeasList extends Component{   
     componentDidMount(){
         this.props.fetchIdeas();
     }
     renderIdeas(){
-        console.log('ideas',this.props.ideas);
         return this.props.ideas.map(idea => {
             return (
                 <ListItem
                     key={idea.id}
                     leftIcon={{name: 'flight-takeoff'}}
                     onPress={()=> this.props.navigation.navigate('EditIdea',{idea})}
+                    onLongPress={() => this.props.removeIdea(idea)}
                     title={idea.title}
                 />
             );
@@ -46,4 +46,4 @@ function mapStateToProps(state){
         ideas
     };
 }
-export default connect(mapStateToProps, { fetchIdeas })(IdeasList);
+export default connect(mapStateToProps, { fetchIdeas, removeIdea })(IdeasList);
