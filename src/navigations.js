@@ -1,9 +1,11 @@
 import React from 'react';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
+
 import LoginForm from './components/login-form';
 import IdeasList from './components/ideas-list';
 import IdeaForm from './components/idea-form';
-import { Icon } from 'react-native-elements';
+import { signOut } from './actions';
 
 const AuthStack = createStackNavigator({
     Login: {
@@ -29,7 +31,18 @@ const AppStack = createStackNavigator({
                         iconStyle={{paddingRight:10}}
                         />
                 ),
-                headerLeft: null,
+                headerLeft: (
+                    <Icon
+                        type='evilicon'
+                        name='user'
+                        size={30}
+                        onPress={()=> {
+                            navigation.navigate('Auth');
+                            signOut();
+                        }}
+                        iconStyle={{paddingLeft:10}}
+                    />
+                ),
             });
         }
     },

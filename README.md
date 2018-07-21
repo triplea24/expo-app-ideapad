@@ -9,8 +9,14 @@ I assumed that you already installed npm, yarn and expo!
     - cd expo-app-ideapad/
     - yarn install
 
-### Important
+## Important
 Create a file called firebase.js inside the project's directory and put the firebase config variable there.
 
 To run the project just simply run this command:
     `exp start`
+
+## TODO
+
+- [ ] Complete SignOut flow
+- [ ] Login with persistance
+- [ ] Add SplashScreen to make the flow smooth

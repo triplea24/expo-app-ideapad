@@ -5,9 +5,9 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
-import LoginForm from './src/components/login-form';
 import reducers from './src/reducers';
 import AppNavigator from './src/navigations';
+import { fetchAuthParams } from './src/utils';
 
 // NOTE: Create a firebase.js file inside the project directory and export the config variable there!!!
 import config from './firebase';
@@ -18,6 +18,9 @@ const store = createStore(reducers, initialStore , applyMiddleware(ReduxThunk));
 export default class App extends React.Component {
   componentDidMount(){
     firebase.initializeApp(config);
+    fetchAuthParams().then(params => {
+      console.log(params);
+    });
   }
   render() {
     return (

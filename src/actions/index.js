@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-import { saveAuthParams } from '../utils';
+import { saveAuthParams, deleteAuthParams } from '../utils';
 
 // AUTH
 export const AUTH_INPUT_CHANGE = 'AUTH_INPUT_CHANGE';
@@ -104,4 +104,8 @@ export function removeIdea({id}){
 
 export function clearIdeaForm(){
     return { type: CLEAR_IDEA_FORM, };
+}
+
+export async function signOut(){
+    return firebase.auth().signOut().then(deleteAuthParams);
 }
